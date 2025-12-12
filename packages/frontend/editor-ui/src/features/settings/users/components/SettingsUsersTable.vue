@@ -107,6 +107,11 @@ const roles = computed<Partial<Record<Role, { label: string; desc: string }>>>((
 		label: i18n.baseText('auth.roles.admin'),
 		desc: i18n.baseText('settings.users.table.row.role.description.admin'),
 	},
+	// HOPPR Custom Role
+	[ROLE.HopprAdmin]: {
+		label: i18n.baseText('auth.roles.hopprAdmin'),
+		desc: i18n.baseText('settings.users.table.row.role.description.hopprAdmin'),
+	},
 	[ROLE.Member]: {
 		label: i18n.baseText('auth.roles.member'),
 		desc: i18n.baseText('settings.users.table.row.role.description.member'),
@@ -136,6 +141,11 @@ const roleActions = computed<Array<ActionDropdownItem<Role>>>(() => [
 	{
 		id: ROLE.Admin,
 		label: i18n.baseText('auth.roles.admin'),
+	},
+	// HOPPR Custom Role - always available
+	{
+		id: ROLE.HopprAdmin,
+		label: i18n.baseText('auth.roles.hopprAdmin'),
 	},
 ]);
 

@@ -14,6 +14,7 @@ import {
 } from './role-maps.ee';
 import type { AllRolesMap, AllRoleTypes, Scope } from '../types.ee';
 import { getRoleScopes } from '../utilities/get-role-scopes.ee';
+import { HOPPR_ADMIN_ROLE, HOPPR_ADMIN_ROLE_SLUG } from '../hoppr';
 
 const ROLE_NAMES: Record<AllRoleTypes, string> = {
 	'global:owner': 'Owner',
@@ -64,12 +65,24 @@ const mapToRoleObject = <T extends keyof typeof ROLE_NAMES>(
 	}));
 
 export const ALL_ROLES: AllRolesMap = {
-	global: mapToRoleObject(GLOBAL_SCOPE_MAP, 'global'),
+	global: [
+		...mapToRoleObject(GLOBAL_SCOPE_MAP, 'global'),
+		// HOPPR Custom Role - additive, does not modify existing roles
+		{
+			slug: HOPPR_ADMIN_ROLE_SLUG,
+			displayName: HOPPR_ADMIN_ROLE.displayName,
+			scopes: [...HOPPR_ADMIN_ROLE.scopes],
+			description: HOPPR_ADMIN_ROLE.description,
+			licensed: true,
+			systemRole: true,
+			roleType: 'global',
+		},
+	],
 	project: mapToRoleObject(PROJECT_SCOPE_MAP, 'project'),
 	credential: mapToRoleObject(CREDENTIALS_SHARING_SCOPE_MAP, 'credential'),
 	workflow: mapToRoleObject(WORKFLOW_SHARING_SCOPE_MAP, 'workflow'),
 };
 
 export const isBuiltInRole = (role: string): role is AllRoleTypes => {
-	return Object.prototype.hasOwnProperty.call(ROLE_NAMES, role);
+	return Object.prototype.hasOwnProperty.call(ROLE_NAMES, role) || role === HOPPR_ADMIN_ROLE_SLUG;
 };

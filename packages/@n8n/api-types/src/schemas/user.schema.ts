@@ -9,6 +9,8 @@ export const ROLE = {
 	Admin: 'global:admin',
 	ChatUser: 'global:chatUser',
 	Default: 'default', // default user with no email when setting up instance
+	// HOPPR Custom Role
+	HopprAdmin: 'global:hopprAdmin',
 } as const;
 
 export type Role = (typeof ROLE)[keyof typeof ROLE];

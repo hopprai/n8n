@@ -26,3 +26,6 @@ export { getRoleScopes, getAuthPrincipalScopes } from './utilities/get-role-scop
 export { getResourcePermissions } from './utilities/get-resource-permissions.ee';
 export type { PermissionsRecord } from './utilities/get-resource-permissions.ee';
 export * from './public-api-permissions.ee';
+
+// HOPPR Customizations
+export * from './hoppr';

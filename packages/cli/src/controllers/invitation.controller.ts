@@ -73,6 +73,7 @@ export class InvitationController {
 		}
 
 		const attributes = invitations.map(({ email, role }) => {
+			// HOPPR Admin is always allowed (custom HOPPR role)
 			if (role === 'global:admin' && !this.license.isAdvancedPermissionsLicensed()) {
 				throw new ForbiddenError(
 					'Cannot invite admin user without advanced permissions. Please upgrade to a license that includes this feature.',
