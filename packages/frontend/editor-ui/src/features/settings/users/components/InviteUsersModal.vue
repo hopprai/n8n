@@ -86,6 +86,11 @@ onMounted(() => {
 						label: i18n.baseText('auth.roles.admin'),
 						disabled: !isAdvancedPermissionsEnabled.value,
 					},
+					// HOPPR Custom Role - always available
+					{
+						value: ROLE.HopprAdmin,
+						label: i18n.baseText('auth.roles.hopprAdmin'),
+					},
 				],
 				capitalize: true,
 			},
@@ -148,7 +153,11 @@ const validateEmails = (value: string | number | boolean | null | undefined) => 
 };
 
 function isInvitableRoleName(val: unknown): val is InvitableRoleName {
-	return typeof val === 'string' && [ROLE.Member, ROLE.Admin].includes(val as InvitableRoleName);
+	// HOPPR Custom Role - added HopprAdmin to invitable roles
+	return (
+		typeof val === 'string' &&
+		[ROLE.Member, ROLE.Admin, ROLE.HopprAdmin].includes(val as InvitableRoleName)
+	);
 }
 
 function onInput(e: FormFieldValueUpdate) {

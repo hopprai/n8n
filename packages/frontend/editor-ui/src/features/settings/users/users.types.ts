@@ -3,7 +3,8 @@ import type { Role, ROLE } from '@n8n/api-types';
 
 export type ILogInStatus = 'LoggedIn' | 'LoggedOut';
 
-export type InvitableRoleName = (typeof ROLE)['Member' | 'Admin'];
+// HOPPR Custom Role - added HopprAdmin to invitable roles
+export type InvitableRoleName = (typeof ROLE)['Member' | 'Admin' | 'HopprAdmin'];
 
 export interface IInviteResponse {
 	user: {

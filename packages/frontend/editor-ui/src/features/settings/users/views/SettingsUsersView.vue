@@ -192,7 +192,8 @@ async function onReinvite(userId: string) {
 	try {
 		const user = usersStore.usersList.state.items.find((u) => u.id === userId);
 		if (user?.email && user?.role) {
-			if (!['global:admin', 'global:member'].includes(user.role)) {
+			// HOPPR Custom Role - added global:hopprAdmin to valid reinvite roles
+			if (!['global:admin', 'global:member', 'global:hopprAdmin'].includes(user.role)) {
 				throw new Error('Invalid role name on reinvite');
 			}
 			await usersStore.reinviteUser({
