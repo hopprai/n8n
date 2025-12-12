@@ -29,6 +29,7 @@ import {
 	PROJECT_ADMIN_ROLE_SLUG,
 	PROJECT_EDITOR_ROLE_SLUG,
 	PROJECT_VIEWER_ROLE_SLUG,
+	HOPPR_ADMIN_ROLE_SLUG,
 } from '@n8n/permissions';
 import { UnexpectedError, UserError } from 'n8n-workflow';
 
@@ -304,6 +305,11 @@ export class RoleService {
 
 	isRoleLicensed(role: AssignableProjectRole) {
 		// TODO: move this info into FrontendSettings
+
+		// HOPPR Custom Role - always licensed (checked before built-in role check)
+		if (role === HOPPR_ADMIN_ROLE_SLUG) {
+			return true;
+		}
 
 		if (!isBuiltInRole(role)) {
 			// This is a custom role, there for we need to check if

@@ -7,6 +7,7 @@ import {
 	ALL_ROLES,
 	type GlobalRole,
 	type Role as RoleDTO,
+	HOPPR_ADMIN_ROLE_SLUG,
 } from '@n8n/permissions';
 
 import type { Role } from 'entities';
@@ -51,16 +52,20 @@ export const ALL_BUILTIN_ROLES = toRoleMap([
 export const GLOBAL_OWNER_ROLE = ALL_BUILTIN_ROLES['global:owner'];
 export const GLOBAL_ADMIN_ROLE = ALL_BUILTIN_ROLES['global:admin'];
 export const GLOBAL_MEMBER_ROLE = ALL_BUILTIN_ROLES['global:member'];
+// HOPPR Custom Role
+export const GLOBAL_HOPPR_ADMIN_ROLE = ALL_BUILTIN_ROLES[HOPPR_ADMIN_ROLE_SLUG];
 
 export const PROJECT_OWNER_ROLE = ALL_BUILTIN_ROLES[PROJECT_OWNER_ROLE_SLUG];
 export const PROJECT_ADMIN_ROLE = ALL_BUILTIN_ROLES[PROJECT_ADMIN_ROLE_SLUG];
 export const PROJECT_EDITOR_ROLE = ALL_BUILTIN_ROLES[PROJECT_EDITOR_ROLE_SLUG];
 export const PROJECT_VIEWER_ROLE = ALL_BUILTIN_ROLES[PROJECT_VIEWER_ROLE_SLUG];
 
-export const GLOBAL_ROLES: Record<GlobalRole, Role> = {
+export const GLOBAL_ROLES: Record<GlobalRole | typeof HOPPR_ADMIN_ROLE_SLUG, Role> = {
 	'global:owner': GLOBAL_OWNER_ROLE,
 	'global:admin': GLOBAL_ADMIN_ROLE,
 	'global:member': GLOBAL_MEMBER_ROLE,
+	// HOPPR Custom Role
+	[HOPPR_ADMIN_ROLE_SLUG]: GLOBAL_HOPPR_ADMIN_ROLE,
 };
 
 export const PROJECT_ROLES: Record<ProjectRole, Role> = {
